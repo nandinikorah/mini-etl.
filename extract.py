@@ -13,14 +13,18 @@ def transform(rows):
     cleaned_rows = []
 
     for row in rows:
+        customer_name = (row.get("customer_name") or "").strip()
+
+        if not customer_name:
+            customer_name = "Unknown"
+
         cleaned_rows.append({
             "customer_id": row["customer_id"].strip(),
-            "customer_name": row["customer_name"].strip().title(),
+            "customer_name": customer_name.title(),
             "city": row["city"].strip().title(),
         })
 
     return cleaned_rows
-
 
 def load(rows, file_path):
     columns = ["customer_id", "customer_name", "city"]
