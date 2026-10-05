@@ -22,9 +22,18 @@ def transform(rows):
     return cleaned_rows
 
 
+def load(rows, file_path):
+    columns = ["customer_id", "customer_name", "city"]
+
+    with open(file_path, mode="w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=columns)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    print(f"Loaded rows: {len(rows)} into {file_path}")
+
+
 if __name__ == "__main__":
     raw_rows = extract("input.csv")
     clean_rows = transform(raw_rows)
-
-    for row in clean_rows:
-        print(row)
+    load(clean_rows, "output.csv")
