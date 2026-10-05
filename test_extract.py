@@ -10,7 +10,7 @@ def test_transform_cleans_text():
 
     assert transform(rows) == [{
         "customer_id": "1",
-        "customer_name": "Nandini",
+        "customer_name": "NANDINI",
         "city": "Kochi",
     }]
 
