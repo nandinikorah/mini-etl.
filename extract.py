@@ -16,7 +16,8 @@ def transform(rows):
         customer_name = (row.get("customer_name") or "").strip()
 
         if not customer_name:
-            customer_name = "Unknown"
+            print("Skipping row: customer name is missing")
+            continue
 
         cleaned_rows.append({
             "customer_id": row["customer_id"].strip(),
@@ -25,7 +26,6 @@ def transform(rows):
         })
 
     return cleaned_rows
-
 def load(rows, file_path):
     columns = ["customer_id", "customer_name", "city"]
 
@@ -35,7 +35,6 @@ def load(rows, file_path):
         writer.writerows(rows)
 
     print(f"Loaded rows: {len(rows)} into {file_path}")
-
 
 if __name__ == "__main__":
     raw_rows = extract("input.csv")
